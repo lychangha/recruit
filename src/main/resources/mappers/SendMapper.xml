@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyc.recruit.model.dao.SendMapper">
+  <resultMap id="BaseResultMap" type="com.lyc.recruit.model.pojo.Send">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="resume_id" jdbcType="INTEGER" property="resumeId" />
+    <result column="position_id" jdbcType="INTEGER" property="positionId" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, resume_id, position_id, `state`, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_send
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_send
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lyc.recruit.model.pojo.Send">
+    insert into user_send (id, resume_id, position_id,
+      `state`, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{resumeId,jdbcType=INTEGER}, #{positionId,jdbcType=INTEGER},
+      #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lyc.recruit.model.pojo.Send">
+    insert into user_send
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="resumeId != null">
+        resume_id,
+      </if>
+      <if test="positionId != null">
+        position_id,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="resumeId != null">
+        #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="positionId != null">
+        #{positionId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lyc.recruit.model.pojo.Send">
+    update user_send
+    <set>
+      <if test="resumeId != null">
+        resume_id = #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="positionId != null">
+        position_id = #{positionId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lyc.recruit.model.pojo.Send">
+    update user_send
+    set resume_id = #{resumeId,jdbcType=INTEGER},
+      position_id = #{positionId,jdbcType=INTEGER},
+      `state` = #{state,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByTwoId" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_send
+    where resume_id = #{resumeId,jdbcType=INTEGER}
+      and position_id = #{positionId,jdbcType=INTEGER}
+  </select>
+
+  <resultMap id="rmSendReq" type="com.lyc.recruit.model.request.SendReq">
+    <id column="id" property="id"></id>
+    <result column="resume_id" property="resumeId"></result>
+    <result column="position_id" property="positionId"></result>
+    <result column="create_time" property="createTime"></result>
+    <result column="update_time" property="updateTime"></result>
+    <association property="resume" select="com.lyc.recruit.model.dao.ResumeMapper.selectByPrimaryKey" column="resume_id"/>
+    <association property="positionReq" select="com.lyc.recruit.model.dao.PositionMapper.selectById" column="position_id"/>
+  </resultMap>
+
+  <select id="selectSendByState" parameterType="java.lang.Integer" resultMap="rmSendReq">
+    select <include refid="Base_Column_List"/>
+    from user_send where `state` = #{state,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPositionId" parameterType="java.lang.Integer">
+    delete from user_send
+    where position_id = #{positionId,jdbcType=INTEGER}
+  </delete>
+
+  <update id="updateState" parameterType="map">
+    update user_send
+    set `state` = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

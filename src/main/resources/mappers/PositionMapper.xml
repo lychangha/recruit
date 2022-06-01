@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyc.recruit.model.dao.PositionMapper">
+  <resultMap id="BaseResultMap" type="com.lyc.recruit.model.pojo.Position">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
+    <result column="quantity" jdbcType="VARCHAR" property="quantity" />
+    <result column="degree" jdbcType="VARCHAR" property="degree" />
+    <result column="experience" jdbcType="VARCHAR" property="experience" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="salary_up" jdbcType="INTEGER" property="salaryUp" />
+    <result column="salary_down" jdbcType="INTEGER" property="salaryDown" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="requirements" jdbcType="VARCHAR" property="requirements" />
+    <result column="hits" jdbcType="INTEGER" property="hits" />
+    <result column="release" jdbcType="TIMESTAMP" property="release" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="resource_man_id" jdbcType="INTEGER" property="resourceManId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, subtitle, quantity, `degree`, experience, city, address, salary_up, salary_down,
+    `describe`, requirements, hits, `release`, category_id, resource_man_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from position
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from position
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lyc.recruit.model.pojo.Position">
+    insert into position (id, title, subtitle,
+      quantity, `degree`, experience,
+      city, address, salary_up,
+      salary_down, `describe`, requirements,
+      hits, `release`, category_id,
+      resource_man_id)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR},
+      #{quantity,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{experience,jdbcType=VARCHAR},
+      #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{salaryUp,jdbcType=INTEGER},
+      #{salaryDown,jdbcType=INTEGER}, #{describe,jdbcType=VARCHAR}, #{requirements,jdbcType=VARCHAR},
+      #{hits,jdbcType=INTEGER}, #{release,jdbcType=TIMESTAMP}, #{categoryId,jdbcType=INTEGER},
+      #{resourceManId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lyc.recruit.model.pojo.Position">
+    insert into position
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="subtitle != null">
+        subtitle,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="degree != null">
+        `degree`,
+      </if>
+      <if test="experience != null">
+        experience,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="salaryUp != null">
+        salary_up,
+      </if>
+      <if test="salaryDown != null">
+        salary_down,
+      </if>
+      <if test="describe != null">
+        `describe`,
+      </if>
+      <if test="requirements != null">
+        requirements,
+      </if>
+      <if test="hits != null">
+        hits,
+      </if>
+      <if test="release != null">
+        `release`,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="resourceManId != null">
+        resource_man_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null">
+        #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="salaryUp != null">
+        #{salaryUp,jdbcType=INTEGER},
+      </if>
+      <if test="salaryDown != null">
+        #{salaryDown,jdbcType=INTEGER},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="requirements != null">
+        #{requirements,jdbcType=VARCHAR},
+      </if>
+      <if test="hits != null">
+        #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="release != null">
+        #{release,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="resourceManId != null">
+        #{resourceManId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lyc.recruit.model.pojo.Position">
+    update position
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        `degree` = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null">
+        experience = #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="salaryUp != null">
+        salary_up = #{salaryUp,jdbcType=INTEGER},
+      </if>
+      <if test="salaryDown != null">
+        salary_down = #{salaryDown,jdbcType=INTEGER},
+      </if>
+      <if test="describe != null">
+        `describe` = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="requirements != null">
+        requirements = #{requirements,jdbcType=VARCHAR},
+      </if>
+      <if test="hits != null">
+        hits = #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="release != null">
+        `release` = #{release,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="resourceManId != null">
+        resource_man_id = #{resourceManId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lyc.recruit.model.pojo.Position">
+    update position
+    set title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=VARCHAR},
+      `degree` = #{degree,jdbcType=VARCHAR},
+      experience = #{experience,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      salary_up = #{salaryUp,jdbcType=INTEGER},
+      salary_down = #{salaryDown,jdbcType=INTEGER},
+      `describe` = #{describe,jdbcType=VARCHAR},
+      requirements = #{requirements,jdbcType=VARCHAR},
+      hits = #{hits,jdbcType=INTEGER},
+      `release` = #{release,jdbcType=TIMESTAMP},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      resource_man_id = #{resourceManId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <resultMap id="rmPositionReq" type="com.lyc.recruit.model.request.PositionReq">
+    <id column="id" property="id"></id>
+    <result column="salary_up" property="salaryUp"></result>
+    <result column="salary_down" property="salaryDown"></result>
+    <result column="category_id" property="categoryId"></result>
+    <result column="resource_man_id" property="resourceManId"></result>
+    <association property="resourceManReq" select="com.lyc.recruit.model.dao.ResourceManMapper.selectHrAndCompany" column="resource_man_id"></association>
+  </resultMap>
+  <select id="selectPositionAndHrAndCompanyByHits" resultMap="rmPositionReq">
+    select <include refid="Base_Column_List"></include>
+    from position order by hits desc limit 0,15
+  </select>
+
+  <select id="selectPositionAndHrAndCompanyByRelease" resultMap="rmPositionReq">
+    select <include refid="Base_Column_List"></include>
+    from position order by `release` desc limit 0,15
+  </select>
+
+  <select id="detail" parameterType="java.lang.Integer" resultMap="rmPositionReq">
+    select <include refid="Base_Column_List"></include>
+    from position
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="rmPositionReq">
+    select <include refid="Base_Column_List"></include>
+    from position
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <resultMap id="rmPositionCategoryReq" type="com.lyc.recruit.model.request.PositionCategoryReq">
+    <id column="id" property="id"></id>
+    <result column="salary_up" property="salaryUp"></result>
+    <result column="salary_down" property="salaryDown"></result>
+    <result column="category_id" property="categoryId"></result>
+    <result column="resource_man_id" property="resourceManId"></result>
+    <association property="category" select="com.lyc.recruit.model.dao.CategoryMapper.selectByPrimaryKey" column="category_id"></association>
+  </resultMap>
+  <select id="selectByHr" parameterType="java.lang.Integer" resultMap="rmPositionCategoryReq">
+    select <include refid="Base_Column_List"></include>
+    from position
+    where resource_man_id = #{resourceManId,jdbcType=INTEGER}
+  </select>
+
+  <resultMap id="CRPositionResultMap" type="com.lyc.recruit.model.request.PositionVO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
+    <result column="quantity" jdbcType="VARCHAR" property="quantity" />
+    <result column="degree" jdbcType="VARCHAR" property="degree" />
+    <result column="experience" jdbcType="VARCHAR" property="experience" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="salary_up" jdbcType="INTEGER" property="salaryUp" />
+    <result column="salary_down" jdbcType="INTEGER" property="salaryDown" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="requirements" jdbcType="VARCHAR" property="requirements" />
+    <result column="hits" jdbcType="INTEGER" property="hits" />
+    <result column="release" jdbcType="TIMESTAMP" property="release" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="resource_man_id" jdbcType="INTEGER" property="resourceManId" />
+    <association property="company" javaType="com.lyc.recruit.model.pojo.Company">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="register_time" jdbcType="DATE" property="registerTime" />
+      <result column="employees" jdbcType="INTEGER" property="employees" />
+      <result column="address" jdbcType="VARCHAR" property="address" />
+      <result column="capital" jdbcType="VARCHAR" property="capital" />
+      <result column="corporate" jdbcType="VARCHAR" property="corporate" />
+      <result column="email" jdbcType="VARCHAR" property="email" />
+      <result column="phone" jdbcType="VARCHAR" property="phone" />
+      <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+      <result column="type" jdbcType="VARCHAR" property="type" />
+      <result column="industry" jdbcType="VARCHAR" property="industry" />
+      <result column="image" jdbcType="VARCHAR" property="image" />
+      <result column="code" jdbcType="VARCHAR" property="code" />
+    </association>
+  </resultMap>
+
+  <select id="searchByConditions" parameterType="com.lyc.recruit.model.request.Conditions" resultMap="CRPositionResultMap">
+    select
+      p.*,c.*
+    from position p
+    left join resource_man r on p.resource_man_id = r.id
+    left join company c on r.`code`= c.`code`
+    <where>
+      <if test="title != null and title != ''">
+        p.title like concat('%',#{title},'%')
+      </if>
+      <if test="city != null and city != ''">
+        and p.city = #{city,jdbcType=VARCHAR}
+      </if>
+      <if test="experience != null and experience != ''">
+        and p.experience = #{experience,jdbcType=VARCHAR}
+      </if>
+      <if test="degree != null and degree != ''">
+        and p.degree = #{degree,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null and type != ''">
+        and type = #{type,jdbcType=VARCHAR}
+      </if>
+      <if test="employeesUp != null and employeesDown != null and employeesUp !='' and employeesDown != ''">
+        and employees <![CDATA[ >= ]]> #{employeesDown,jdbcType=INTEGER}
+        and employees <![CDATA[ < ]]> #{employeesUp,jdbcType=INTEGER}
+      </if>
+      <if test="salaryDown != null and salaryUp != null and salaryDown != '' and salaryUp != ''">
+        and salary_down <![CDATA[ >= ]]> #{salaryDown,jdbcType=INTEGER}
+        and salary_up <![CDATA[ <= ]]> #{salaryUp,jdbcType=INTEGER}
+      </if>
+    </where>
+      <if test="rank != null">
+          order by ${rank} desc
+      </if>
+  </select>
+</mapper>

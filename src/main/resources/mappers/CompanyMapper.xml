@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyc.recruit.model.dao.CompanyMapper">
+  <resultMap id="BaseResultMap" type="com.lyc.recruit.model.pojo.Company">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="register_time" jdbcType="DATE" property="registerTime" />
+    <result column="employees" jdbcType="INTEGER" property="employees" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="capital" jdbcType="VARCHAR" property="capital" />
+    <result column="corporate" jdbcType="VARCHAR" property="corporate" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="industry" jdbcType="VARCHAR" property="industry" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `name`, register_time, employees, address, capital, corporate, email, phone, 
+    introduction, `type`, industry, image, code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from company
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from company
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lyc.recruit.model.pojo.Company">
+    insert into company (id, `name`, register_time, 
+      employees, address, capital, 
+      corporate, email, phone, 
+      introduction, `type`, industry, 
+      image, code)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{registerTime,jdbcType=DATE}, 
+      #{employees,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{capital,jdbcType=VARCHAR}, 
+      #{corporate,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lyc.recruit.model.pojo.Company">
+    insert into company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="registerTime != null">
+        register_time,
+      </if>
+      <if test="employees != null">
+        employees,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="capital != null">
+        capital,
+      </if>
+      <if test="corporate != null">
+        corporate,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="industry != null">
+        industry,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=DATE},
+      </if>
+      <if test="employees != null">
+        #{employees,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="capital != null">
+        #{capital,jdbcType=VARCHAR},
+      </if>
+      <if test="corporate != null">
+        #{corporate,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lyc.recruit.model.pojo.Company">
+    update company
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        register_time = #{registerTime,jdbcType=DATE},
+      </if>
+      <if test="employees != null">
+        employees = #{employees,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="capital != null">
+        capital = #{capital,jdbcType=VARCHAR},
+      </if>
+      <if test="corporate != null">
+        corporate = #{corporate,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lyc.recruit.model.pojo.Company">
+    update company
+    set `name` = #{name,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=DATE},
+      employees = #{employees,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      capital = #{capital,jdbcType=VARCHAR},
+      corporate = #{corporate,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from company where code = #{code,jdbcType=VARCHAR}
+  </select>
+</mapper>
